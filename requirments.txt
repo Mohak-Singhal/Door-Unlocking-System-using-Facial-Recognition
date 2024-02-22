@@ -1,0 +1,30 @@
+Here are the individual pip commands to install each of the required packages :
+
+bash
+Copy code
+# OpenCV (cv2):
+pip install opencv-python
+
+# pygame:
+pip install pygame
+
+# face_recognition:
+# For macOS:
+brew install cmake
+brew install boost
+pip install dlib
+pip install face_recognition
+
+# For Windows:
+pip install cmake
+pip install dlib
+pip install face_recognition
+
+# For Linux:
+sudo apt-get install cmake
+pip install dlib
+pip install face_recognition
+
+# numpy:
+pip install numpy
+Note: glob is a built-in module in Python, so you don't need to install it separately.

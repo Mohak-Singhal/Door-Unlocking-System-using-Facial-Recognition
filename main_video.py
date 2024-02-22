@@ -2,6 +2,7 @@ import cv2
 import pygame
 import os
 import datetime
+import time
 from simple_facerec import SimpleFacerec
 from send_email import send_email
 
@@ -20,6 +21,8 @@ cap = cv2.VideoCapture(1)
 if not os.path.exists("images_email"):
     os.makedirs("images_email")
 
+intruder_detected_time = None  # Variable to store the time when an intruder is detected
+
 while True:
     ret, frame = cap.read()
     frame_copy = frame.copy()  # Create a copy of the frame
@@ -36,13 +39,15 @@ while True:
 
     # Capture image and send email if an intruder is detected
     if "Unknown" in face_names:
-        timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-        image_name = f"intruder_{timestamp}.jpg"
-        image_path = os.path.join("images_email", image_name)
-        cv2.imwrite(image_path, frame_copy)
-        print("Intruder detected! Image captured.")
-        send_email(image_path)
-        alarm_sound.play()  # Trigger the alarm
+        if intruder_detected_time is None or (datetime.datetime.now() - intruder_detected_time).total_seconds() > 30:
+            timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+            image_name = f"intruder_{timestamp}.jpg"
+            image_path = os.path.join("images_email", image_name)
+            cv2.imwrite(image_path, frame_copy)
+            print("Intruder detected! Image captured.")
+            send_email(image_path)
+            alarm_sound.play()  # Trigger the alarm
+            intruder_detected_time = datetime.datetime.now()  # Update the intruder detected time
 
     key = cv2.waitKey(1)
     if key == 27:  # Press 'ESC' to exit

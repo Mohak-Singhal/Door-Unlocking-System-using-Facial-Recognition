@@ -35,6 +35,9 @@ while True:
         cv2.putText(frame_copy, name, (x1, y1 - 10), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 200), 2)
         cv2.rectangle(frame_copy, (x1, y1), (x2, y2), (0, 0, 200), 4)
 
+    # Resize the frame to one-fourth of the screen size
+    frame_copy = cv2.resize(frame_copy, (0, 0), fx=0.5, fy=0.5)
+
     cv2.imshow("Frame", frame_copy)
 
     # Capture image and send email if an intruder is detected

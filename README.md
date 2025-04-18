@@ -27,7 +27,7 @@ This project is a security-focused door unlocking system leveraging **facial rec
 ## 🛠️ How It Works  
 1. The camera scans for a face when someone approaches the door.  
 2. The system checks the face against the prebuilt model for recognition:  
-   - **If Recognized**: Unlocks the door.  
+   - **If Recognized**: Unlocks the door which was demostrated by a servo motor.  
    - **If Unrecognized**:  
      - Takes a photo of the individual.  
      - Rings an alarm to notify nearby people.  
